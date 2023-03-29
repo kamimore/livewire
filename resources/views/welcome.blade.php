@@ -1,23 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Livewire</title>
+    @livewireStyles
 </head>
 
-<body class="antialiased">
-    <div>
-        Welcome to laravel
-    </div>
+<body>
+    @livewire('counter')
+    @livewireScripts
 </body>
 
 </html>
