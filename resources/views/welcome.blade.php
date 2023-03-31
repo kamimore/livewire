@@ -6,12 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Livewire</title>
-    @livewireStyles
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- @livewireStyles --}}
+    <livewire:styles />
 </head>
 
 <body>
-    @livewire('counter')
-    @livewireScripts
+    {{-- @livewire('comments') --}}
+    {{-- @livewireScripts --}}
+    <livewire:comments />
+    <livewire:scripts />
 </body>
 
 </html>
