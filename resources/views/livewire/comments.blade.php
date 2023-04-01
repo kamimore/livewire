@@ -41,7 +41,7 @@
                 </div>
             @endforeach
             <div class="d-flex align-items-center justify-content-center">
-                {{ $comments->links() }}
+                {{ $comments->links('pagination') }}
             </div>
         </div>
     </div>
