@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Comment;
+use App\Models\SupportTicket;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -17,6 +18,14 @@ class Comments extends Component
 
     public $newComment;
     public $image;
+    public $ticketId;
+
+    protected $listeners = ['ticketSelected'];
+
+    public function ticketSelected($ticketId)
+    {
+        $this->ticketId = $ticketId;
+    }
 
     public function updatedNewComment()
     {
@@ -35,12 +44,15 @@ class Comments extends Component
             return;
         }
         if (!$this->image) {
-            $this->image = null;
+            $imagePath = null;
+        } else {
+            $imagePath = Storage::disk('public')->put('images', $this->image);
         }
 
-        $imagePath = Storage::disk('public')->put('images', $this->image);
         Comment::create(['body' => $this->newComment,
-            'image' => $imagePath, 'user_id' => rand(1, 50)]);
+            'image' => $imagePath, 'user_id' => rand(1, 50),
+            'support_ticket_id' => $this->ticketId,
+        ]);
 
         $this->newComment = "";
         $this->image = "";
@@ -57,6 +69,10 @@ class Comments extends Component
 
     public function render()
     {
-        return view('livewire.comments', ['comments' => Comment::latest()->paginate(2)]);
+        if (!$this->ticketId) {
+            $this->ticketId = SupportTicket::where('id', '>', 0)->first()->id;
+
+        }
+        return view('livewire.comments', ['comments' => Comment::where('support_ticket_id', $this->ticketId)->latest()->paginate(2)]);
     }
 }

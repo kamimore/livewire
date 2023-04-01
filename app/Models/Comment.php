@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Comment extends Model
 {
     use HasFactory;
-    public $fillable = ['body','user_id','image'];
+    public $fillable = ['body','user_id','image','support_ticket_id'];
     
 
     public function creator()
