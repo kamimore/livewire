@@ -13,9 +13,14 @@
         </form>
         @foreach($comments as $key => $comment)
             <div class="card m-4">
-                <div class="d-flex align-items-center justify-content-start pt-3 px-3">
-                    <h3>{{ $comment->creator->name }}</h3>
-                    <span class="mx-5"><u>{{ $comment->created_at->diffForHumans() }}</u></span>
+                <div class="d-flex align-items-center justify-content-between mx-2">
+                    <div class="d-flex align-items-center justify-content-start pt-3 px-1">
+                        <h3>{{ $comment->creator->name }}</h3>
+                        <span class="mx-5"><u>{{ $comment->created_at->diffForHumans() }}</u></span>
+                    </div>
+                    <div class="text-danger h4 fw-bold " role="button" wire:click="removeComment({{ $comment->id }})">
+                        X
+                    </div>
                 </div>
                 <p class="card-body">
                     {{ $comment->body }}

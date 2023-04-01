@@ -31,9 +31,16 @@ class Comments extends Component
         }
 
         $createdComment = Comment::create(['body' => $this->newComment, 'user_id' => rand(1, 50)]);
-        $this->comments->push($createdComment);
         $this->comments->prepend($createdComment);
         $this->newComment = "";
+    }
+
+    public function removeComment($id)
+    {
+        Comment::where('id', $id)->delete();
+        $this->comments  = $this->comments->filter(function ($value, $key) use ($id) {
+            return $value->id != $id;
+        });
     }
 
     public function render()
