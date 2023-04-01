@@ -7,10 +7,15 @@
             {{ $message }}
         @enderror
     </span>
+    <span class="text-danger">
+        @error('image')
+            {{ $message }}
+        @enderror
+    </span>
 
     <div>
         @if ($image)
-        <img class="mx-3" src="{{$image->temporaryUrl()}}" width="60">
+            <img class="mx-3" src="{{ $image->temporaryUrl() }}" width="60">
         @endif
         <section class="mx-3 mb-2">
             <input class="form-control" type="file" id="image" wire:model="image">
@@ -33,7 +38,7 @@
                 <div class="card m-3">
                     <div class="d-flex align-items-center justify-content-between mx-2">
                         <div class="d-flex align-items-center justify-content-start pt-3 px-1">
-                            <h3>{{ $comment->creator->name }}</h3>
+                            <h4>{{ $comment->creator->name }}</h4>
                             <span class="mx-5"><u>{{ $comment->created_at->diffForHumans() }}</u></span>
                         </div>
                         <div class="text-danger h4 fw-bold " role="button"
@@ -41,12 +46,16 @@
                             X
                         </div>
                     </div>
-                    <p class="card-body">
+                    <p class="card-body mb-0 pb-2">
                         {{ $comment->body }}
                     </p>
+                    @if ($comment->image)
+                        <img height="50" width="50" src="{{ $comment->imagePath }}"
+                            alt="{{ $comment->creator->name }}" style="margin-left:10px">
+                    @endif
                 </div>
             @endforeach
-                {{ $comments->links('pagination') }}
+            {{ $comments->links('pagination') }}
         </div>
     </div>
 </div>

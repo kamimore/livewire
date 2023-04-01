@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Comment;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -17,27 +18,40 @@ class Comments extends Component
     public $newComment;
     public $image;
 
-    public function updated($field)
+    public function updatedNewComment()
     {
-        $this->validateOnly($field, ['newComment' => 'required|max:255|min:5']);
+        $this->validate(['newComment' => 'required|max:255|min:5']);
+    }
+
+    public function updatedImage()
+    {
+        $this->validate(['image' => 'max:1024']);
     }
 
     public function addComment()
     {
-        $this->validate(['newComment' => 'required']);
 
         if ($this->newComment == '') {
             return;
         }
+        if (!$this->image) {
+            $this->image = null;
+        }
 
-        Comment::create(['body' => $this->newComment, 'user_id' => rand(1, 50)]);
+        $imagePath = Storage::disk('public')->put('images', $this->image);
+        Comment::create(['body' => $this->newComment,
+            'image' => $imagePath, 'user_id' => rand(1, 50)]);
+
         $this->newComment = "";
+        $this->image = "";
         session()->flash('message', 'Comment added successfully');
     }
 
     public function removeComment($id)
     {
-        Comment::where('id', $id)->delete();
+        $comment = Comment::find($id);
+        Storage::disk('public')->delete($comment->image);
+        $comment->delete();
         session()->flash('message', 'Comment deleted successfully');
     }
 
