@@ -4,18 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Comment;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Comments extends Component
 {
+    use WithPagination;
 
-    public $comments;
     public $newComment;
-
-    public function mount()
-    {
-        $initialComments = Comment::orderByDesc('created_at')->get();
-        $this->comments = $initialComments;
-    }
 
     public function updated($field)
     {
@@ -31,22 +26,18 @@ class Comments extends Component
         }
 
         $createdComment = Comment::create(['body' => $this->newComment, 'user_id' => rand(1, 50)]);
-        $this->comments->prepend($createdComment);
         $this->newComment = "";
-        session()->flash('message','Comment added successfully');
+        session()->flash('message', 'Comment added successfully');
     }
 
     public function removeComment($id)
     {
         Comment::where('id', $id)->delete();
-        $this->comments  = $this->comments->filter(function ($value, $key) use ($id) {
-            return $value->id != $id;
-        });
-        session()->flash('message','Comment deleted successfully');
+        session()->flash('message', 'Comment deleted successfully');
     }
 
     public function render()
     {
-        return view('livewire.comments');
+        return view('livewire.comments', ['comments' => Comment::latest()->paginate(2)]);
     }
 }

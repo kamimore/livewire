@@ -18,7 +18,7 @@
         </form>
         <div class="mx-3 mt-2 p-2 alert alert-success @if (session()->has('message')) visble @else invisible @endif">
             <span class="text-success">
-                {{ session('message','Nothing') }}
+                {{ session('message', 'Nothing') }}
             </span>
         </div>
 
@@ -40,6 +40,9 @@
                     </p>
                 </div>
             @endforeach
+            <div class="d-flex align-items-center justify-content-center">
+                {{ $comments->links() }}
+            </div>
         </div>
     </div>
 </div>
