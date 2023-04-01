@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
     <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul class="pagination d-flex align-items-center justify-content-center flex-wrap ">
             @if ($paginator->onFirstPage())
                 <li class="page-item">
                     <span class="page-link text-dark bg-light">

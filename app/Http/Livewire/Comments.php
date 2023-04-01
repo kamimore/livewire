@@ -4,15 +4,18 @@ namespace App\Http\Livewire;
 
 use App\Models\Comment;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Comments extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
     // protected $paginationTheme = 'bootstrap';
 
     public $newComment;
+    public $image;
 
     public function updated($field)
     {

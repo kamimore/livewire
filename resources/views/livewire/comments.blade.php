@@ -2,13 +2,19 @@
     <h1 class="h1 text-center my-4">
         Comments
     </h1>
-    <span class="text-danger px-3">
+    <span class="text-danger">
         @error('newComment')
             {{ $message }}
         @enderror
     </span>
 
     <div>
+        @if ($image)
+        <img class="mx-3" src="{{$image->temporaryUrl()}}" width="60">
+        @endif
+        <section class="mx-3 mb-2">
+            <input class="form-control" type="file" id="image" wire:model="image">
+        </section>
         <form class="d-flex align-items-center justify-content-center px-2" wire:submit.prevent="addComment">
             <div class="form-group col-8 col-md-10 px-2">
                 <input type="text" class="form-control" aria-describedby="commentHelp"
@@ -40,9 +46,7 @@
                     </p>
                 </div>
             @endforeach
-            <div class="d-flex align-items-center justify-content-center">
                 {{ $comments->links('pagination') }}
-            </div>
         </div>
     </div>
 </div>
