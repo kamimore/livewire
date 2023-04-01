@@ -10,6 +10,8 @@ class Comments extends Component
 {
     use WithPagination;
 
+    // protected $paginationTheme = 'bootstrap';
+
     public $newComment;
 
     public function updated($field)
@@ -25,7 +27,7 @@ class Comments extends Component
             return;
         }
 
-        $createdComment = Comment::create(['body' => $this->newComment, 'user_id' => rand(1, 50)]);
+        Comment::create(['body' => $this->newComment, 'user_id' => rand(1, 50)]);
         $this->newComment = "";
         session()->flash('message', 'Comment added successfully');
     }
