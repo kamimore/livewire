@@ -13,11 +13,11 @@
         @foreach($comments as $key => $comment)
             <div class="card m-4">
                 <div class="d-flex align-items-center justify-content-start pt-3 px-3">
-                    <h3>{{ $comment['creator'] }}</h3>
-                    <span class="mx-5"><u>{{ $comment['created_at'] }}</u></span>
+                    <h3>{{ $comment->creator->name }}</h3>
+                    <span class="mx-5"><u>{{ $comment->created_at->diffForHumans() }}</u></span>
                 </div>
                 <p class="card-body">
-                    {{ $comment['body'] }}
+                    {{ $comment->body }}
                 </p>
             </div>
         @endforeach

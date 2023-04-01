@@ -16,7 +16,7 @@
 <body>
     {{-- @livewire('comments') --}}
     {{-- @livewireScripts --}}
-    <livewire:comments />
+    <livewire:comments :initialComments="$comments" />
     <livewire:scripts />
 </body>
 

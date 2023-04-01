@@ -2,19 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use Carbon\Carbon;
 use Livewire\Component;
 
 class Comments extends Component
 {
 
-    public $comments = [
-        [
-            'body' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt dicta obcaecati porro fugiat nihil ex. Enim ducimus eum sint dignissimos quo voluptatum! Eius voluptatum deserunt, nesciunt quae fugit laboriosam illum.",
-            'created_at' => '1 min ago',
-            'creator' => 'User1',
-        ]
-    ];
+    public $comments;
+
+    public function mount($initialComments){
+        $this->comments = $initialComments;
+    }
 
     public $newComment;
 
