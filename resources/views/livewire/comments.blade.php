@@ -2,16 +2,12 @@
     <h1 class="h1 text-center my-4">
         Comments
     </h1>
-    <span class="text-danger">
-        @error('newComment')
+
+    @error('image')
+        <span class="text-danger">
             {{ $message }}
-        @enderror
-    </span>
-    <span class="text-danger">
-        @error('image')
-            {{ $message }}
-        @enderror
-    </span>
+        </span>
+    @enderror
 
     <div>
         @if ($image)
@@ -27,11 +23,18 @@
             </div>
             <button class="btn btn-success col-4 col-md-2" type="submit">Add</button>
         </form>
-        <div class="mx-3 mt-2 p-2 alert alert-success @if (session()->has('message')) visble @else invisible @endif">
-            <span class="text-success">
-                {{ session('message', 'Nothing') }}
+        @error('newComment')
+            <span class="text-danger">
+                {{ $message }}
             </span>
-        </div>
+        @enderror
+        @if (session()->has('message'))
+            <div class="mx-3 mt-2 p-2 alert alert-success">
+                <span class="text-success">
+                    {{ session('message', 'Nothing') }}
+                </span>
+            </div>
+        @endif
 
         <div>
             @foreach ($comments as $key => $comment)
