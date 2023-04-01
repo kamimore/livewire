@@ -3,13 +3,13 @@
         Comments
     </h1>
     <div>
-        <div class="d-flex align-items-center justify-content-center px-2">
+        <form class="d-flex align-items-center justify-content-center px-2" wire:submit.prevent="addComment">
             <div class="form-group col-8 col-md-10 px-2">
                 <input type="text" class="form-control" aria-describedby="commentHelp"
                     placeholder="What's in your mind bro" wire:model.lazy="newComment">
             </div>
-            <button class="btn btn-success col-4 col-md-2" type="submit" wire:click="addComment">Add</button>
-        </div>
+            <button class="btn btn-success col-4 col-md-2" type="submit">Add</button>
+        </form>
         @foreach($comments as $key => $comment)
             <div class="card m-4">
                 <div class="d-flex align-items-center justify-content-start pt-3 px-3">
