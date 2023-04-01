@@ -19,6 +19,8 @@ class Comments extends Component
 
     public function addComment()
     {
+        $this->validate(['newComment'=>'required']);
+        
         if ($this->newComment == '') {
             return;
         }

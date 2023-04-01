@@ -2,6 +2,7 @@
     <h1 class="h1 text-center my-4">
         Comments
     </h1>
+    @error('newComment') <span class="text-danger px-3">{{ $message }}</span> @enderror
     <div>
         <form class="d-flex align-items-center justify-content-center px-2" wire:submit.prevent="addComment">
             <div class="form-group col-8 col-md-10 px-2">
