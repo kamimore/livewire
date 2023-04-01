@@ -2,12 +2,12 @@
     <h1 class="h1 text-center my-4">
         Comments
     </h1>
-    @error('newComment') <span class="text-danger px-3">{{ $message }}</span> @enderror
+    <span class="text-danger px-3">@error('newComment') {{ $message }}@enderror</span>
     <div>
         <form class="d-flex align-items-center justify-content-center px-2" wire:submit.prevent="addComment">
             <div class="form-group col-8 col-md-10 px-2">
                 <input type="text" class="form-control" aria-describedby="commentHelp"
-                    placeholder="What's in your mind bro" wire:model.lazy="newComment">
+                    placeholder="What's in your mind bro" wire:model.debounce.500ms="newComment">
             </div>
             <button class="btn btn-success col-4 col-md-2" type="submit">Add</button>
         </form>

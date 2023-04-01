@@ -17,10 +17,15 @@ class Comments extends Component
         $this->comments = $initialComments;
     }
 
+    public function updated($field)
+    {
+        $this->validateOnly($field, ['newComment' => 'required|max:255|min:5']);
+    }
+
     public function addComment()
     {
-        $this->validate(['newComment'=>'required']);
-        
+        $this->validate(['newComment' => 'required']);
+
         if ($this->newComment == '') {
             return;
         }
