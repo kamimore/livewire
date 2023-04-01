@@ -13,7 +13,7 @@ class Comments extends Component
 
     public function mount()
     {
-        $initialComments = Comment::all();
+        $initialComments = Comment::orderByDesc('created_at')->get();
         $this->comments = $initialComments;
     }
 
@@ -22,12 +22,10 @@ class Comments extends Component
         if ($this->newComment == '') {
             return;
         }
-        array_unshift($this->comments, [
-            'body' => $this->newComment,
-            'created_at' => now()->diffForHumans(),
-            'creator' => 'User2',
-        ]);
 
+        $createdComment = Comment::create(['body' => $this->newComment, 'user_id' => rand(1, 50)]);
+        $this->comments->push($createdComment);
+        $this->comments->prepend($createdComment);
         $this->newComment = "";
     }
 
