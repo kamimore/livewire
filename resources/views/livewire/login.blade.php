@@ -19,7 +19,7 @@
                                                     wire:model="form.email">
                                                 @error('form.email')
                                                     <span class="text-danger">
-                                                        {{ $message }}
+                                                        The email field is required.
                                                     </span>
                                                 @enderror
                                             </div>
@@ -32,9 +32,14 @@
                                                     wire:model="form.password">
                                                 @error('form.password')
                                                     <span class="text-danger">
-                                                        {{ $message }}
+                                                        The password field is required.
                                                     </span>
                                                 @enderror
+                                                @if(session()->has('message'))
+                                                    <span class="text-danger">
+                                                        {{ session()->get('message') }}
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
 

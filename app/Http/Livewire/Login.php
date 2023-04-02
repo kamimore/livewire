@@ -19,9 +19,12 @@ class Login extends Component
             'form.password' => 'required',
         ]);
 
-        Auth::attempt($this->form);
+        if (Auth::attempt($this->form)) {
+            return redirect()->route('home');
+        } else {
+            session()->flash('message', 'Invalid credentials please try again.');
+        }
 
-        return redirect()->route('home');
     }
 
     public function render()
