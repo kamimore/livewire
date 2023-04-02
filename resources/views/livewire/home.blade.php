@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @section('content')
     <div class="d-flex align-items-stretch justify-content-around mx-2 mx-lg-5 mt-4 mt-lg-4 flex-column flex-lg-row">
         <div class="col col-lg-4 card card-body mx-0 mx-lg-4 mb-4 mb-lg-0">
