@@ -9,12 +9,19 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/home">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
-            </li>
+            @auth
+               <livewire:logout />
+            @endauth
+            {{-- @if (auth()->check()) --}}
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+                {{-- @endif --}}
+            @endguest
         </ul>
     </div>
 </nav>
