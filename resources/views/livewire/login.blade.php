@@ -1,5 +1,3 @@
-@section('content')
-    <div>
-        I am login
-    </div>
-@endsection
+<div>
+    I am login
+</div>
